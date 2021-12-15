@@ -257,6 +257,35 @@ public class LoanCalcViewController implements Initializable {
 		//TODO: Validate EscrowAmount >= 0
 		
 		//TODO: Validate AdditionalPayemnt >= 0
+		if (InterestRate.getText().trim().isEmpty() || InterestRate<0 || InterestRate>20) ) {
+			contentText.append("Enter the correct InterestRate. \\n");
+			goodtogo = false;
+		}
+		
+		int years = Integer.parseInt(NbrOfYears.getText());
+		if(NbrOfYears.getText().trim().isEmpty() || yearN <= 0) {
+			contentText.append("Enter the correct NbrOfYears. \n");
+			goodtogo = false;
+			
+		}
+	
+		double additonalPayment = Double.parseDouble(AdditionalPayment.getText());
+		if(additonalPayment.getText().trim().isEmpty() || additonalPayment<0) {
+			contentText.append("Enter the correct additionalPayment. \n");
+			goodtogo = false;
+			
+					
+		}
+		
+		double escrow = Double.parseDouble(EscrowAmount.getText());
+		if(escrow<0) {
+			contentText.append("Enter the correct EscrowAmount. \n");
+			goodtogo = false;
+			
+					
+		}
+		
+
 		
 		if (!goodtogo) {
 			Alert fail = new Alert(AlertType.ERROR);
