@@ -247,40 +247,32 @@ public class LoanCalcViewController implements Initializable {
 			goodtogo = false;
 		}
 		
-		//TODO: The line above validates LoanAmount.  To fail validation, add to 'contentText' and set 'goodtoGo' to false
-		// 	add the following validaitons:
 		
-		//TODO: Validate InterestRate is between 0 and 20.  Make sure there's no alpha characters.
-
-		//TODO: Validate NbrOfYears is > 0
-		
-		//TODO: Validate EscrowAmount >= 0
-		
-		//TODO: Validate AdditionalPayemnt >= 0
-		if (InterestRate.getText().trim().isEmpty() || InterestRate<0 || InterestRate>20) ) {
+		int ir = Integer.parseInt(InterestRate.getText());
+		if (InterestRate.getText().trim().isEmpty() || ir<0 || ir>20) {
 			contentText.append("Enter the correct InterestRate. \\n");
 			goodtogo = false;
 		}
 		
 		int years = Integer.parseInt(NbrOfYears.getText());
-		if(NbrOfYears.getText().trim().isEmpty() || yearN <= 0) {
+		if(NbrOfYears.getText().trim().isEmpty() || years <= 0) {
 			contentText.append("Enter the correct NbrOfYears. \n");
 			goodtogo = false;
 			
 		}
 	
-		double additonalPayment = Double.parseDouble(AdditionalPayment.getText());
-		if(additonalPayment.getText().trim().isEmpty() || additonalPayment<0) {
-			contentText.append("Enter the correct additionalPayment. \n");
+	
+		double escrow = Double.parseDouble(EscrowAmount.getText());
+		if(EscrowAmount.getText().trim().isEmpty()||escrow<0) {
+			contentText.append("Enter the correct EscrowAmount. \n");
 			goodtogo = false;
 			
 					
 		}
-		
-		double escrow = Double.parseDouble(EscrowAmount.getText());
-		if(escrow<0) {
-			contentText.append("Enter the correct EscrowAmount. \n");
-			goodtogo = false;
+		double aPay = Double.parseDouble(AdditionalPayment.getText());
+		if(AdditionalPayment.getText().trim().isEmpty() || aPay<0) {
+				contentText.append("Enter the correct additionalPayment. \n");
+				goodtogo = false;
 			
 					
 		}

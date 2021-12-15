@@ -36,17 +36,40 @@ public class Loan {
 		//		Hint: use while loop
 
 		//TODO: Create final payment (last payment might be partial payment)
+		while (RemainingBalance >GetPMT()+additionalPayment) {	
+			Payment payment = new Payment(RemainingBalance, PaymentCnt++, startDate, this, false);
+			RemainingBalance = payment.getEndingBalance();
+			startDate = startDate.plusMonths(1);
+			loanPayments.add(payment);
+		}
+		if(RemainingBalance>GetPMT()) {
+			Payment payment = new Payment(RemainingBalance, PaymentCnt++, startDate, this, true);
+			payment.setPayment(RemainingBalance);
+			startDate = startDate.plusMonths(1);
+			loanPayments.add(payment);
+			RemainingBalance*=InterestRate/12;
+			}
+		Payment payment = new Payment(RemainingBalance, PaymentCnt++, startDate, this, true);
+		
+		startDate = startDate.plusMonths(1);
+		loanPayments.add(payment);
+		
+
 	}
 
 	public double GetPMT() {
 		double PMT = 0;
-		//TODO: Calculate PMT (use FinanceLib.pmt)
+		//TODO: Calculate PMT (use 
+		PMT=FinanceLib.pmt(InterestRate/12, LoanPaymentCnt, LoanAmount, LoanBalanceEnd, bCompoundingOption);
 		return Math.abs(PMT);
 	}
 
 	public double getTotalPayments() {
 		double tot = 0;
 		//TODO: Calculate total payments
+		for(Payment p:loanPayments) {
+			tot+=p.getPayment();
+		}
 		return tot;
 	}
 
@@ -54,6 +77,9 @@ public class Loan {
 
 		double interest = 0;
 		//TODO: Calculate total Interest
+		for(Payment p:loanPayments) {
+			interest+=p.getInterestPayment();
+		}
 		return interest;
 
 	}
@@ -62,6 +88,7 @@ public class Loan {
 
 		double escrow = 0;
 		//TODO: Calculate total escrow
+		escrow +=ths.Escrow;
 		return escrow;
 
 	}
